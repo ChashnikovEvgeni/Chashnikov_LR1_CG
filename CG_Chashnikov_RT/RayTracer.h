@@ -4,7 +4,7 @@
 #include "LiteMath.h"
 
 using namespace HydraLiteMath;
-
+class LightSource;
 class GeoObject;
 
 class Ray
@@ -38,5 +38,19 @@ private:
   float3 bg_color;   // цвет фона
 };
 
+class WhittedRT
+{
+public:
+	WhittedRT() = default;
+	WhittedRT(const float3& a_bg_color) : bg_color(a_bg_color) {};
+	~WhittedRT() = default;
+
+	float3 TraceRay(const Ray& ray, const std::vector<std::shared_ptr<GeoObject>>& objects, const std::vector<std::shared_ptr<LightSource>>& light/*, int depth*/);
+	bool ShadowRay(const Ray& ray, const std::vector<std::shared_ptr<GeoObject>>& objects);
+
+private:
+
+	float3 bg_color;   // цвет фона
+};
 
 #endif //RT_SAMPLE_NEW_RAY_H
